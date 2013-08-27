@@ -155,7 +155,7 @@
 ;; (defconst ecb-version "2.33beta1"
 ;;   "Current ECB version.")
 
-(defconst ecb-version "2.40"
+(defconst ecb-version "2.41.1"
   "Current ECB version.")
 
 (eval-when-compile
