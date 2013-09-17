@@ -79,10 +79,10 @@ face and a display like \"[+] [<bucket-name>]\"."
 		   (set symbol value)
 		   (ecb-clear-tag-tree-cache)))
   :type '(list (string :tag "Bucket-prefix" :value "[")
-               (string :tag "Bucket-suffix" :value "]")
-               (choice :tag "Bucket-face" :menu-tag "Bucket-face"
-                       (const :tag "No special face" :value nil)
-                       (face :tag "Face" :value ecb-bucket-node-face)))
+	       (string :tag "Bucket-suffix" :value "]")
+	       (choice :tag "Bucket-face" :menu-tag "Bucket-face"
+		       (const :tag "No special face" :value nil)
+		       (face :tag "Face" :value ecb-bucket-node-face)))
   :initialize 'custom-initialize-default)
 
 (defcustom ecb-use-speedbar-instead-native-tree-buffer nil
@@ -113,14 +113,14 @@ conjunction with ECB."
   :group 'ecb-sources
   :group 'ecb-methods
   :type '(radio (const :tag "Do not use speedbar" :value nil)
-                (const :tag "For directories" :value dir)
-                (const :tag "For sources" :value source)
-                (const :tag "For methods" :value method))
+		(const :tag "For directories" :value dir)
+		(const :tag "For sources" :value source)
+		(const :tag "For methods" :value method))
   :initialize 'custom-initialize-default
   :set (function (lambda (sym val)
-                   (set sym val)
-                   (if (and (boundp 'ecb-minor-mode) ecb-minor-mode)
-                       (ecb-redraw-layout-full)))))
+		   (set sym val)
+		   (if (and (boundp 'ecb-minor-mode) ecb-minor-mode)
+		       (ecb-redraw-layout-full)))))
 
 (defvar ecb-tree-do-not-leave-window-after-select--internal nil
   "Only set by customizing `ecb-tree-do-not-leave-window-after-select' or
@@ -155,12 +155,12 @@ node-selection can be changed fast and easy in a tree-buffer without
 customizing this option, but of course not for future Emacs sessions!"
   :group 'ecb-tree-buffer
   :set (function (lambda (sym val)
-                   (set sym val)
-                   (setq ecb-tree-do-not-leave-window-after-select--internal
-                         (ecb-copy-list val))))
+		   (set sym val)
+		   (setq ecb-tree-do-not-leave-window-after-select--internal
+			 (ecb-copy-list val))))
   :type '(repeat (choice :menu-tag "Buffer-name"
-                        (string :tag "Buffer-name as string")
-                        (symbol :tag "Symbol holding buffer-name"))))
+			(string :tag "Buffer-name as string")
+			(symbol :tag "Symbol holding buffer-name"))))
 
 (defcustom ecb-tree-indent 4
   "*Indent size for tree buffer.
@@ -177,7 +177,7 @@ When the expand-symbol is located before the items then the tree looks like:
 \[-] ECB
     \[+] code-save
     \[-] ecb-images
-        \[-] directories
+	\[-] directories
 
 When located after then the tree looks like:
 
@@ -234,41 +234,41 @@ used by ECB <= 1.96:
 \[-] ECB
     \[+] code-save
     \[-] ecb-images
-        \[-] directories
-            \[-] height-15
-                * close.xpm
-                * empty.xpm
-                * leaf.xpm
-                * open.xpm
-            \[+] height-17
-            \[+] height-19
-            \[+] height-21
-        \[x] history
-        \[x] methods
-        \[x] sources
+	\[-] directories
+	    \[-] height-15
+		* close.xpm
+		* empty.xpm
+		* leaf.xpm
+		* open.xpm
+	    \[+] height-17
+	    \[+] height-19
+	    \[+] height-21
+	\[x] history
+	\[x] methods
+	\[x] sources
 
 With both ascii-styles the tree-layout can be affected with the options
 `ecb-tree-indent' and `ecb-tree-expand-symbol-before'."
   :group 'ecb-tree-buffer
   :group 'ecb-most-important
   :type '(radio (const :tag "Images-style" :value image)
-                (const :tag "Ascii-style with guide-lines" :value ascii-guides)
-                (const :tag "Ascii-style w/o guide-lines" :value ascii-no-guides)))
+		(const :tag "Ascii-style with guide-lines" :value ascii-guides)
+		(const :tag "Ascii-style w/o guide-lines" :value ascii-no-guides)))
 
 ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: add here the analyse buffer if
 ;; additonal images are necessary - but currently i don't think we need
 ;; special images for this analyse-stuff.
 (defcustom ecb-tree-image-icons-directories
   (let ((base (concat (if ecb-regular-xemacs-package-p
-                          (format "%s" (locate-data-directory "ecb"))
-                        ecb-ecb-dir)
-                      "ecb-images/")))
+			  (format "%s" (locate-data-directory "ecb"))
+			ecb-ecb-dir)
+		      "ecb-images/")))
     (cons (concat base "default/height-17")
-          (mapcar (function (lambda (i)
-                              (cons (car i) (concat base (cdr i)))))
-                  '((ecb-directories-buffer-name . "directories/height-17")
-                    (ecb-sources-buffer-name . "sources/height-14_to_21")
-                    (ecb-methods-buffer-name . "methods/height-14_to_21")))))
+	  (mapcar (function (lambda (i)
+			      (cons (car i) (concat base (cdr i)))))
+		  '((ecb-directories-buffer-name . "directories/height-17")
+		    (ecb-sources-buffer-name . "sources/height-14_to_21")
+		    (ecb-methods-buffer-name . "methods/height-14_to_21")))))
   "*Directories where the images for the tree-buffer can be found.
 This is a cons cell where:
 
@@ -298,18 +298,18 @@ ECB-etc data-directory \(the directory returned by \(locate-data-directory
 \"ecb\")."
   :group 'ecb-tree-buffer
   :type '(cons (directory :tag "Full default image-path")
-               (repeat (cons (choice :menu-tag "Buffer-name"
-                                     (string :tag "Buffer-name as string")
-                                     (symbol :tag "Symbol holding
-                                     buffer-name"))                             
-                             (directory :tag "Full image-path for this tree-buffer")))))
+	       (repeat (cons (choice :menu-tag "Buffer-name"
+				     (string :tag "Buffer-name as string")
+				     (symbol :tag "Symbol holding
+				     buffer-name"))
+			     (directory :tag "Full image-path for this tree-buffer")))))
 
 ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: rename this to ecb-truncate-lines.
 (defcustom ecb-tree-truncate-lines '(ecb-directories-buffer-name
-                                     ecb-sources-buffer-name
-                                     ecb-methods-buffer-name
-                                     ecb-history-buffer-name
-                                     ecb-analyse-buffer-name)
+				     ecb-sources-buffer-name
+				     ecb-methods-buffer-name
+				     ecb-history-buffer-name
+				     ecb-analyse-buffer-name)
   "*Truncate lines in ECB buffers.
 If a buffer \(either its name or the variable-symbol which holds the name) is
 contained in this list then line-truncation is switched on for this buffer
@@ -327,14 +327,11 @@ ECB again to take effect."
   :group 'ecb-tree-buffer
   :group 'ecb-most-important
   :type '(repeat (choice :menu-tag "Buffer-name"
-                         (string :tag "Buffer-name as string")
-                         (symbol :tag "Symbol holding buffer-name"))))
+			 (string :tag "Buffer-name as string")
+			 (symbol :tag "Symbol holding buffer-name"))))
 
 (defcustom ecb-tree-easy-hor-scroll 5
   "*Scroll step for easy hor. scrolling via mouse-click in tree-buffers.
-XEmacs has horizontal scroll-bars so invisible parts beyond the right
-window-border of a tree-buffer can always made visible very easy.
-
 GNU Emacs does not have hor. scroll-bars so especially with the mouse it is
 quite impossible to scroll smoothly right and left. The functions
 `scroll-left' and `scroll-right' can be annoying and are also not bound to
@@ -350,8 +347,8 @@ scroll-step `window-width' - 2. Default is a scroll-step of 5. If the value is
 nil then no keys for horizontal scrolling are bound."
   :group 'ecb-tree-buffer
   :type '(radio :value 5
-                (const :tag "No hor. mouse scrolling" :value nil)
-                (integer :tag "Scroll step")))
+		(const :tag "No hor. mouse scrolling" :value nil)
+		(integer :tag "Scroll step")))
 
 
 (defcustom ecb-tree-make-parent-node-sticky t
@@ -364,9 +361,7 @@ no parent then just the next node above is displayed in the header-line. The
 node displayed in the header-line is exactly in the same manner clickable as
 all other nodes.
 
-See also `ecb-tree-stickynode-indent-string'.
-
-This feature is only available with Gnu Emacs, not with XEmacs."
+See also `ecb-tree-stickynode-indent-string'."
   :group 'ecb-tree-buffer
   :group 'ecb-most-important
   :type 'boolean)
@@ -386,7 +381,7 @@ with that starting-point.
 Changing this option takes only effect after restarting Emacs!"
   :group 'ecb-tree-buffer
   :type 'string)
-  
+
 
 ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: maybe we should change this to a
 ;; type analogous to ecb-tree-truncate-lines
@@ -406,11 +401,11 @@ keyboard in the ECB buffers\". If you change this during ECB is activated you
 must deactivate and activate ECB again to take effect."
   :group 'ecb-tree-buffer
   :type '(radio (const :tag "Match only prefix"
-                       :value prefix)
-                (const :tag "Match every substring"
-                       :value substring)
-                (const :tag "No incremental search"
-                       :value nil)))
+		       :value prefix)
+		(const :tag "Match every substring"
+		       :value substring)
+		(const :tag "No incremental search"
+		       :value nil)))
 
 (defcustom ecb-tree-navigation-by-arrow t
   "*Enable smart navigation in the tree-windows by horizontal arrow-keys.
@@ -434,15 +429,15 @@ ECB and then activating it again!"
 moving the mouse over a node is activated. See
 `ecb-directories-show-node-info' etc...."
   (let ((when-list (mapcar (function (lambda (elem)
-                                       (car (symbol-value elem))))
-                           '(ecb-directories-show-node-info
-                             ecb-sources-show-node-info
-                             ecb-methods-show-node-info
-                             ecb-history-show-node-info
-                             ecb-analyse-show-node-info
-                             ))))
+				       (car (symbol-value elem))))
+			   '(ecb-directories-show-node-info
+			     ecb-sources-show-node-info
+			     ecb-methods-show-node-info
+			     ecb-history-show-node-info
+			     ecb-analyse-show-node-info
+			     ))))
     (or (member 'if-too-long when-list)
-        (member 'always when-list))))
+	(member 'always when-list))))
 
 (defcustom ecb-primary-secondary-mouse-buttons 'mouse-2--C-mouse-2
   "*Primary- and secondary mouse button for using the ECB-buffers.
@@ -486,11 +481,11 @@ ECB again to take effect!"
   :group 'ecb-tree-buffer
   :group 'ecb-most-important
   :type '(radio (const :tag "Primary: mouse-2, secondary: Ctrl-mouse-2"
-                       :value mouse-2--C-mouse-2)
-                (const :tag "Primary: mouse-1, secondary: Ctrl-mouse-1"
-                       :value mouse-1--C-mouse-1)
-                (const :tag "Primary: mouse-1, secondary: mouse-2"
-                       :value mouse-1--mouse-2)))
+		       :value mouse-2--C-mouse-2)
+		(const :tag "Primary: mouse-1, secondary: Ctrl-mouse-1"
+		       :value mouse-1--C-mouse-1)
+		(const :tag "Primary: mouse-1, secondary: mouse-2"
+		       :value mouse-1--mouse-2)))
 
 (defcustom ecb-tree-mouse-action-trigger 'button-release
   "*When the tree-buffer mouse-action should be triggered.
@@ -503,7 +498,7 @@ If you change this during ECB is activated you must deactivate and activate
 ECB again to take effect!"
   :group 'ecb-tree-buffer
   :type '(radio (const :tag "After button release" :value button-release)
-                (const :tag "After button press" :value button-press)))
+		(const :tag "After button press" :value button-press)))
 
 (defcustom ecb-mouse-click-destination 'last-point
   "*Destination of a mouse-button click.
@@ -532,9 +527,9 @@ mouse-button and [C-RET] as secondary mouse-button!"
   :group 'ecb-tree-buffer
   :group 'ecb-most-important
   :type '(radio (const :tag "Left/topmost edit-window"
-                       :value left-top)
-                (const :tag "Last edit-window with point"
-                       :value last-point)))
+		       :value left-top)
+		(const :tag "Last edit-window with point"
+		       :value last-point)))
 
 
 (defcustom ecb-common-tree-buffer-after-create-hook nil
@@ -578,10 +573,10 @@ IMPORTANT NOTE: Every time the synchronization is done the hook
 `ecb-basic-buffer-sync-hook' is evaluated."
   :group 'ecb-tree-buffer
   :type '(radio :tag "Synchronize basic ECB buffers"
-                (const :tag "Always" :value always)
-                (const :tag "Never" nil)
-                (repeat :tag "Not with these modes"
-                        (symbol :tag "mode"))))
+		(const :tag "Always" :value always)
+		(const :tag "Never" nil)
+		(repeat :tag "Not with these modes"
+			(symbol :tag "mode"))))
 
 (defcustom ecb-basic-buffer-sync-delay 0.25
   "*Time Emacs must be idle before the special ECB-buffers are synchronized.
@@ -591,14 +586,14 @@ small value of about 0.25 seconds saves CPU resources and you get even though
 almost the same effect as if you set no delay."
   :group 'ecb-tree-buffer
   :type '(radio (const :tag "No synchronizing delay"
-                       :value nil)
-                (number :tag "Idle time before synchronizing"
-                        :value 0.25))
+		       :value nil)
+		(number :tag "Idle time before synchronizing"
+			:value 0.25))
   :set (function (lambda (symbol value)
-                   (set symbol value)
-                   (if ecb-minor-mode
-                       (ecb-activate-ecb-autocontrol-function
-                        value 'ecb-basic-buffer-sync))))
+		   (set symbol value)
+		   (if ecb-minor-mode
+		       (ecb-activate-ecb-autocontrol-function
+			value 'ecb-basic-buffer-sync))))
   :initialize 'custom-initialize-default)
 
 (defcustom ecb-basic-buffer-sync-hook nil
@@ -671,12 +666,12 @@ ECB <version>: debug <ACTION> of '<CLASS>' advice ADVICE: ARGS.
 If ARGS is nil then only the message above is reported."
   (when ecb-advices-debug-error
     (message (concat (format "ECB %s: debug %s of '%s' advice %s "
-                             ecb-version
-                             action
-                             class
-                             advice)
-                     (if args
-                         (apply 'format args))))))
+			     ecb-version
+			     action
+			     class
+			     advice)
+		     (if args
+			 (apply 'format args))))))
 
 (defmacro defecb-advice-set (advice-set docstring &optional permanent)
   "Defines an advice-set for ECB.
@@ -703,7 +698,7 @@ PERMANENT can also be a function which will be called by `ecb-disable-advices'
 for this advice set \(the function gets one argument: the symbol of the
 advice-set) and have to return not nil if the advice-set should not be disable
 by `ecb-disable-advices' unless the FORCE-PERMANENT of this function is set to
-not nil. 
+not nil.
 
 Example:
 
@@ -712,8 +707,8 @@ Example:
   `(eval-and-compile
      (add-to-list 'ecb-adviced-function-sets (cons (quote ,advice-set), nil))
      ,(if permanent
-          `(add-to-list 'ecb-adviced-permanent-function-sets
-                        (cons (quote ,advice-set) ,permanent)))
+	  `(add-to-list 'ecb-adviced-permanent-function-sets
+			(cons (quote ,advice-set) ,permanent)))
      (defvar ,advice-set nil ,docstring)))
 
 (put 'defecb-advice-set 'lisp-indent-function 1)
@@ -734,29 +729,29 @@ Example:
   \"If FRAME is equal to the ECB frame then...\"
   \(let \(\(frame \(or \(ad-get-arg 0) \(selected-frame))))
     \(if \(and ecb-minor-mode
-             \(equal frame ecb-frame))
-        \(when \(ecb-confirm \"Attempt to delete the ECB-frame....Proceed? \")
-	  \(ecb-deactivate-internal) 
+	     \(equal frame ecb-frame))
+	\(when \(ecb-confirm \"Attempt to delete the ECB-frame....Proceed? \")
+	  \(ecb-deactivate-internal)
 	  ad-do-it)
       ad-do-it)))"
   `(progn
      (if (assoc (quote ,advice-set) ecb-adviced-function-sets)
-         (add-to-list (quote ,advice-set)
-                      (cons (quote ,adviced-function) (quote ,advice-class)))
+	 (add-to-list (quote ,advice-set)
+		      (cons (quote ,adviced-function) (quote ,advice-class)))
        (error "The advice-set %s does not exist!"
-              (symbol-name (quote ,advice-set))))
+	      (symbol-name (quote ,advice-set))))
      (if (not (member (quote ,advice-class)
-                      '(around after before)))
-         (error "The advice-class %s is not allowed - only around, after and before!"
-                (symbol-name (quote ,advice-class))))
+		      '(around after before)))
+	 (error "The advice-class %s is not allowed - only around, after and before!"
+		(symbol-name (quote ,advice-class))))
      (add-to-list 'ecb-adviced-functions (cons (quote ,adviced-function) (quote ,advice-class)))
      (eval-and-compile
        (defadvice ,adviced-function (,advice-class ecb)
-         ,advice-docstring
-         (ecb-advices-debug-error (quote ,adviced-function)
-                                  (quote ,advice-class)
-                                  'calling)
-         ,@body))))
+	 ,advice-docstring
+	 (ecb-advices-debug-error (quote ,adviced-function)
+				  (quote ,advice-class)
+				  'calling)
+	 ,@body))))
 
 (put 'defecb-advice 'lisp-indent-function 3)
 
@@ -774,28 +769,28 @@ IMPORTANT: Do not use the function directly. Always use `ecb-enable-advices',
 `ecb-disable-advices' or `ecb-with-original-adviced-function-set'!."
   (if (< arg 0)
       (progn
-        (ad-disable-advice function-symbol advice-class 'ecb)
-        (ad-activate function-symbol)
-        (ecb-advices-debug-error function-symbol advice-class 'disabling))
+	(ad-disable-advice function-symbol advice-class 'ecb)
+	(ad-activate function-symbol)
+	(ecb-advices-debug-error function-symbol advice-class 'disabling))
     (ad-enable-advice function-symbol advice-class 'ecb)
     (ad-activate function-symbol)
     (ecb-advices-debug-error function-symbol advice-class 'enabling)))
-    
+
 
 (defun ecb-enable-advices (adviced-function-set-var)
   "Enable all advices of ADVICED-FUNCTION-SET-VAR, which must be defined by
 `defecb-advice-set'."
   (if ecb-advices-debug-error
       (message "ECB %s: debug enabling the advice-set: %s"
-               ecb-version adviced-function-set-var))
+	       ecb-version adviced-function-set-var))
   (if (eq adviced-function-set-var 'ecb-always-disabled-advices)
       (error "The advice-set ecb-always-disabled-advices must not be enabled!"))
   (if (not (assq adviced-function-set-var ecb-adviced-function-sets))
       (error "The adviced function set %s is not defined by defecb-advice-set!"
-             (symbol-name adviced-function-set-var)))
+	     (symbol-name adviced-function-set-var)))
   (dolist (elem (symbol-value adviced-function-set-var))
     (ecb-enable-ecb-advice (car elem) (cdr elem) 1)))
-  
+
 (defun ecb-disable-advices (adviced-function-set-var &optional force-permanent)
   "Disable all advices of ADVICED-FUNCTION-SET-VAR, which must be defined by
 `defecb-advice-set'
@@ -814,19 +809,19 @@ If optional FORCE-PERMANENT is not nil then ADVICED-FUNCTION-SET-VAR will
 be disabled regardless if permanent or not."
   (if ecb-advices-debug-error
       (message "ECB %s: debug disabling the advice-set: %s"
-               ecb-version adviced-function-set-var))
+	       ecb-version adviced-function-set-var))
   (if (not (assq adviced-function-set-var ecb-adviced-function-sets))
       (error "The adviced function set %s is not defined by defecb-advice-set!"
-             (symbol-name adviced-function-set-var)))
+	     (symbol-name adviced-function-set-var)))
   (let ((permanent (if force-permanent
-                       nil
-                     (cdr (assq adviced-function-set-var
-                                ecb-adviced-permanent-function-sets)))))
+		       nil
+		     (cdr (assq adviced-function-set-var
+				ecb-adviced-permanent-function-sets)))))
     (unless (or (eq permanent t)
-                (and (functionp permanent)
-                     (funcall permanent adviced-function-set-var)))
+		(and (functionp permanent)
+		     (funcall permanent adviced-function-set-var)))
       (dolist (elem (symbol-value adviced-function-set-var))
-        (ecb-enable-ecb-advice (car elem) (cdr elem) -1)))))
+	(ecb-enable-ecb-advice (car elem) (cdr elem) -1)))))
 
 ;; for the outmost-caller-stuff see ecb-with-original-adviced-function-set
 (defmacro ecb-with-ecb-advice (function-symbol advice-class &rest body)
@@ -854,32 +849,32 @@ Example where this macro is used for `walk-windows' within another advice:
     ;; adviced function AND the advice-class! different advice-classes for the
     ;; same function have to be treated differently!!
     `(let ((,outmost-caller-p (unless (member ,advice-class (get ,function-symbol 'ecb-with-ecb-advice))
-                                (put ,function-symbol 'ecb-with-ecb-advice
-                                     (append (list ,advice-class) (get ,function-symbol 'ecb-with-ecb-advice)))
-                                ,advice-class)))
+				(put ,function-symbol 'ecb-with-ecb-advice
+				     (append (list ,advice-class) (get ,function-symbol 'ecb-with-ecb-advice)))
+				,advice-class)))
        (if (not (member (cons ,function-symbol ,advice-class)
-                      ecb-always-disabled-advices))
-         (error "Advice for %s with class %s not registered in ecb-always-disabled-advices!"
-                (symbol-name ,function-symbol)
-                (symbol-name ,advice-class)))
+		      ecb-always-disabled-advices))
+	 (error "Advice for %s with class %s not registered in ecb-always-disabled-advices!"
+		(symbol-name ,function-symbol)
+		(symbol-name ,advice-class)))
        (if ecb-advices-debug-error
-           (message "ECB %s: debug with always disabled ecb-advice: %s %s - ENTRY"
-                    ecb-version ,advice-class ,function-symbol))
+	   (message "ECB %s: debug with always disabled ecb-advice: %s %s - ENTRY"
+		    ecb-version ,advice-class ,function-symbol))
        (unwind-protect
-         (progn
-           (when ,outmost-caller-p
-             (ecb-enable-ecb-advice ,function-symbol ,advice-class 1))
-           ,@body)
-         (when ,outmost-caller-p
-           ;; Only if we are the outmost caller we are allowed to disable the
-           ;; enabled advice
-           (put ,function-symbol 'ecb-with-ecb-advice
-                (delete ,advice-class (get ,function-symbol 'ecb-with-ecb-advice)))
-           (ecb-enable-ecb-advice ,function-symbol ,advice-class -1))
-         (if ecb-advices-debug-error
-             (message "ECB %s: debug with always disabled ecb-advice: %s %s - EXIT"
-                      ecb-version ,advice-class ,function-symbol))))))
-         
+	 (progn
+	   (when ,outmost-caller-p
+	     (ecb-enable-ecb-advice ,function-symbol ,advice-class 1))
+	   ,@body)
+	 (when ,outmost-caller-p
+	   ;; Only if we are the outmost caller we are allowed to disable the
+	   ;; enabled advice
+	   (put ,function-symbol 'ecb-with-ecb-advice
+		(delete ,advice-class (get ,function-symbol 'ecb-with-ecb-advice)))
+	   (ecb-enable-ecb-advice ,function-symbol ,advice-class -1))
+	 (if ecb-advices-debug-error
+	     (message "ECB %s: debug with always disabled ecb-advice: %s %s - EXIT"
+		      ecb-version ,advice-class ,function-symbol))))))
+
 (put 'ecb-with-ecb-advice 'lisp-indent-function 2)
 
 ;; (insert (pp (macroexpand '(ecb-with-ecb-advice 'one-window-p 'around
@@ -903,32 +898,32 @@ Example:
 \(ecb-with-original-adviced-function-set 'ecb-layout-basic-adviced-functions
    \(do-something..))"
   (let ((outmost-caller-p (make-symbol "outmost-caller-p")))
-    `(let ((,outmost-caller-p 
-            (unless (equal (cdr (assq ,adviced-function-set-var ecb-adviced-function-sets))
-                           'outmost-caller)
-              ;; if we are the outmost caller of this macro we store this
-              ;; for
-              ;; a) following callers
-              ;; b) ourself, so we can later reset is
-              (setcdr (assq ,adviced-function-set-var ecb-adviced-function-sets) 'outmost-caller))
-            ))
+    `(let ((,outmost-caller-p
+	    (unless (equal (cdr (assq ,adviced-function-set-var ecb-adviced-function-sets))
+			   'outmost-caller)
+	      ;; if we are the outmost caller of this macro we store this
+	      ;; for
+	      ;; a) following callers
+	      ;; b) ourself, so we can later reset is
+	      (setcdr (assq ,adviced-function-set-var ecb-adviced-function-sets) 'outmost-caller))
+	    ))
        (if ecb-advices-debug-error
-           (message "ECB %s: debug with original advice-set: %s - ENTRY"
-                    ecb-version ,adviced-function-set-var))
+	   (message "ECB %s: debug with original advice-set: %s - ENTRY"
+		    ecb-version ,adviced-function-set-var))
        (unwind-protect
-           (progn
-             (when ,outmost-caller-p
-               ;; we must force disabling permanent advice-sets too
-               (ecb-disable-advices ,adviced-function-set-var t))
-             ,@body)
-         (when ,outmost-caller-p
-           ;; Only if we are the outmost caller we are allowed to re-enable the
-           ;; disabled advice-set
-           (setcdr (assq ,adviced-function-set-var ecb-adviced-function-sets) nil)
-           (ecb-enable-advices ,adviced-function-set-var))
-         (if ecb-advices-debug-error
-             (message "ECB %s: debug with original advice-set: %s - EXIT"
-                      ecb-version ,adviced-function-set-var))))))
+	   (progn
+	     (when ,outmost-caller-p
+	       ;; we must force disabling permanent advice-sets too
+	       (ecb-disable-advices ,adviced-function-set-var t))
+	     ,@body)
+	 (when ,outmost-caller-p
+	   ;; Only if we are the outmost caller we are allowed to re-enable the
+	   ;; disabled advice-set
+	   (setcdr (assq ,adviced-function-set-var ecb-adviced-function-sets) nil)
+	   (ecb-enable-advices ,adviced-function-set-var))
+	 (if ecb-advices-debug-error
+	     (message "ECB %s: debug with original advice-set: %s - EXIT"
+		      ecb-version ,adviced-function-set-var))))))
 
 
 (put 'ecb-with-original-adviced-function-set 'lisp-indent-function 1)
@@ -952,11 +947,11 @@ If optional arg BUFFER is nil then the just FILENAME is returned.
 If BUFFER is not nil then it can be either a buffer-object or a buffer-name.
 A cons is returned where car is FILENAME and cdr is the buffername of BUFFER."
   (let ((buffername (when buffer
-                      (if (bufferp buffer)
-                          (buffer-name buffer)
-                        buffer))))
+		      (if (bufferp buffer)
+			  (buffer-name buffer)
+			buffer))))
     (if buffername
-        (cons filename buffername)
+	(cons filename buffername)
       filename)))
 
 (defun ecb-source-get-filename (source)
@@ -986,10 +981,10 @@ existing ans readable file this means the file is loaded into a buffer.
 
 Note: The buffer is just returned but not displayed."
   (let* ((my-source (if (consp source) source (cons source nil)))
-         (filename (car my-source))
-         (buffer (ecb-buffer-obj (cdr my-source))))
+	 (filename (car my-source))
+	 (buffer (ecb-buffer-obj (cdr my-source))))
     (or buffer
-        (find-file-noselect filename))))
+	(find-file-noselect filename))))
 
 (defvar ecb-path-selected-directory nil
   "Path to currently selected directory.")
@@ -1012,9 +1007,9 @@ Returns in the new value. FILENAME and BUFFER must not be nil.
 For a description of FILENAME and BUFFER see `ecb-source-make'."
   (unless (and filename buffer)
     (error "ECB %s: Invalid setting of `ecb-path-selected-source with file %s, buffer %s"
-           ecb-version filename buffer))
+	   ecb-version filename buffer))
   (setq ecb-path-selected-source (ecb-source-make filename buffer)))
-  
+
 (defun ecb-path-selected-source (&optional type)
   "Get the value of the internal variable `ecb-path-selected-source'.
 If optional arg TYPE is the symbol 'file then the filename-part
@@ -1055,11 +1050,11 @@ Removes all creators and set it to nil."
   (dolist (creator-elem ecb-tree-buffer-creators)
     ;; create all the tree-buffers if they don't already exist
     (funcall (cdr creator-elem))))
-  
+
 
 (defmacro defecb-tree-buffer-creator (creator
-                                      tree-buffer-name-symbol
-                                      docstring &rest body)
+				      tree-buffer-name-symbol
+				      docstring &rest body)
   "Define a creator-function CREATOR for a tree-buffer which name is hold in
 the symbol TREE-BUFFER-NAME-SYMBOL. Do not quote CREATOR and
 TREE-BUFFER-NAME-SYMBOL. DOCSTRING is the docstring for CREATOR. BODY is all
@@ -1076,22 +1071,19 @@ When creating a tree-buffer for ECB then it MUST be created with this macro
 and not with `tree-buffer-create'!"
   `(eval-and-compile
      (ecb-tree-buffer-creators-register (quote ,tree-buffer-name-symbol)
-                                        (quote ,creator))
+					(quote ,creator))
      (defun ,creator ()
        ,docstring
        (unless (ecb-ecb-buffer-registry-get-symbol ,tree-buffer-name-symbol)
-         (ecb-ecb-buffer-registry-add ,tree-buffer-name-symbol
-                                      (quote ,tree-buffer-name-symbol)
-                                      t)
-         ,@body))))
+	 (ecb-ecb-buffer-registry-add ,tree-buffer-name-symbol
+				      (quote ,tree-buffer-name-symbol)
+				      t)
+	 ,@body))))
 
 (put 'defecb-tree-buffer-creator 'lisp-indent-function 2)
 
-;; all created ecb-buffers 
+;; all created ecb-buffers
 
-;; KB: `defecb-tree-buffer-creator' calls ecb-ecb-buffer-registry-add. Besides
-;; `defecb-window-dedicator-to-ecb-buffer' this is the only modifier of that
-;; variable!
 (defvar ecb-ecb-buffer-registry nil
   "The ecb-buffers registry.
 
@@ -1129,30 +1121,30 @@ See `defecb-window-dedicator-to-ecb-buffer' for more details and an example.")
   (if (assoc name ecb-ecb-buffer-registry)
       (ecb-set-elt (assoc name ecb-ecb-buffer-registry) 3 set-fcn-symbol)
     (setq ecb-ecb-buffer-registry
-          (cons (list name name-symbol tree-buffer-p set-fcn-symbol)
-                ecb-ecb-buffer-registry))))
+	  (cons (list name name-symbol tree-buffer-p set-fcn-symbol)
+		ecb-ecb-buffer-registry))))
 
 (defsubst ecb-ecb-buffer-registry-name-list (&optional only-tree-buffers)
   (delq nil (mapcar (function (lambda (e)
-                                (and (or (not only-tree-buffers)
-                                         (nth 2 e))
-                                     (nth 0 e))))
-                    ecb-ecb-buffer-registry)))
+				(and (or (not only-tree-buffers)
+					 (nth 2 e))
+				     (nth 0 e))))
+		    ecb-ecb-buffer-registry)))
 
 (defsubst ecb-ecb-buffer-registry-symbol-list (&optional only-tree-buffers)
   (delq nil (mapcar (function (lambda (e)
-                                (and (or (not only-tree-buffers)
-                                         (nth 2 e))
-                                     (nth 1 e))))
-                    ecb-ecb-buffer-registry)))
+				(and (or (not only-tree-buffers)
+					 (nth 2 e))
+				     (nth 1 e))))
+		    ecb-ecb-buffer-registry)))
 
 (defsubst ecb-ecb-buffer-registry-buffer-list (&optional only-tree-buffers)
   (delq nil (mapcar (function (lambda (e)
-                                (and (or (not only-tree-buffers)
-                                         (nth 2 e))
-                                     (ecb-buffer-obj (nth 0 e)))))
-                    ecb-ecb-buffer-registry)))
-  
+				(and (or (not only-tree-buffers)
+					 (nth 2 e))
+				     (ecb-buffer-obj (nth 0 e)))))
+		    ecb-ecb-buffer-registry)))
+
 (defsubst ecb-ecb-buffer-registry-get-symbol (name)
   (nth 1 (assoc name ecb-ecb-buffer-registry)))
 
@@ -1173,27 +1165,27 @@ like \(<buffer-name-symbol> . <callback-symbol>)."
 (defun ecb-tree-buffer-callbacks-add (type buffer-name-symbol callback)
   (unless (member type '(select expand))
     (error "ECB %s tries to add tree-buffer-callback of unknown type %s"
-           ecb-version type))
+	   ecb-version type))
   ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: maybe we should add a check if
   ;; the buffer-name-symbol is already registered with defecb-tree-buffer-creator
   (let ((type-elem (ecb-find-assoc type ecb-tree-buffer-callbacks)))
     (unless (ecb-find-assoc buffer-name-symbol type-elem)
       (setcdr type-elem (cons (cons buffer-name-symbol callback)
-                              (cdr type-elem))))))
+			      (cdr type-elem))))))
 
 
 (defun ecb-tree-buffer-callbacks-alist-of-type (type)
   (unless (member type '(select expand))
     (error "ECB %s tries to get tree-buffer-callback of unknown type %s"
-           ecb-version type))
+	   ecb-version type))
   (cdr (assoc type ecb-tree-buffer-callbacks)))
 
 
 (defmacro defecb-tree-buffer-callback (callback
-                                       tree-buffer-name-symbol
-                                       callback-type
-                                       optional-arg-list
-                                       docstring &rest body)
+				       tree-buffer-name-symbol
+				       callback-type
+				       optional-arg-list
+				       docstring &rest body)
   "Define a callback-function CALLBACK for a tree-buffer which name is hold in
 the symbol TREE-BUFFER-NAME-SYMBOL. Do not quote CALLBACK and
 TREE-BUFFER-NAME-SYMBOL and CALLBACK-TYPE. DOCSTRING is the
@@ -1243,32 +1235,32 @@ because then a lot of stuff needed to be done by every
 tree-buffer is automatically performed."
   `(eval-and-compile
      (ecb-tree-buffer-callbacks-add (quote ,callback-type)
-                                    (quote ,tree-buffer-name-symbol)
-                                    (quote ,callback))
+				    (quote ,tree-buffer-name-symbol)
+				    (quote ,callback))
      (defun ,callback ,(append '(node ecb-button edit-window-nr shift-mode meta-mode)
-                               optional-arg-list)
+			       optional-arg-list)
        ,(concat (if (equal callback-type 'select)
-                    (concat
-                     "Handle clicking onto NODE in the current tree-buffer.\n"
-                     "ECB-BUTTON can be 1, 2 or 3. If 3 then EDIT-WINDOW-NR contains the number\n"
-                     "of the edit-window the NODE should be displayed or whatever should be done\n"
-                     "with NODE. For 1 and 2 the value of EDIT-WINDOW-NR is ignored.\n"
-                     "SHIFT-MODE and META-MODE are self-explanatory.")
-                  (concat
-                   "Handle expanding NODE in the current tree-buffer.\n"
-                   "ECB-BUTTON can be 1, 2 or 3. If 3 then EDIT-WINDOW-NR contains the number\n"
-                   "of the edit-window the NODE should be displayed or whatever should be done\n"
-                   "with NODE. For 1 and 2 the value of EDIT-WINDOW-NR is ignored.\n"
-                   "SHIFT-MODE and META-MODE are self-explanatory."))
-                "\n\n"
-                docstring)
+		    (concat
+		     "Handle clicking onto NODE in the current tree-buffer.\n"
+		     "ECB-BUTTON can be 1, 2 or 3. If 3 then EDIT-WINDOW-NR contains the number\n"
+		     "of the edit-window the NODE should be displayed or whatever should be done\n"
+		     "with NODE. For 1 and 2 the value of EDIT-WINDOW-NR is ignored.\n"
+		     "SHIFT-MODE and META-MODE are self-explanatory.")
+		  (concat
+		   "Handle expanding NODE in the current tree-buffer.\n"
+		   "ECB-BUTTON can be 1, 2 or 3. If 3 then EDIT-WINDOW-NR contains the number\n"
+		   "of the edit-window the NODE should be displayed or whatever should be done\n"
+		   "with NODE. For 1 and 2 the value of EDIT-WINDOW-NR is ignored.\n"
+		   "SHIFT-MODE and META-MODE are self-explanatory."))
+		"\n\n"
+		docstring)
        (let ((no-meta-hiding nil))
-         (prog1
-             (progn
-               ,@body)
-           ,(if (equal callback-type 'select)
-                `(when (and (not no-meta-hiding) meta-mode)
-                   (ecb-run-with-idle-timer 0.001 nil 'ecb-hide-ecb-windows))))))))
+	 (prog1
+	     (progn
+	       ,@body)
+	   ,(if (equal callback-type 'select)
+		`(when (and (not no-meta-hiding) meta-mode)
+		   (ecb-run-with-idle-timer 0.001 nil 'ecb-hide-ecb-windows))))))))
 
 ;; (insert (pp (macroexpand
 ;;              '(defecb-tree-buffer-callback kausi-callback ecb-history-buffer
@@ -1283,31 +1275,31 @@ tree-buffer is automatically performed."
 ;; the filename/path cache
 
 (defecb-multicache ecb-filename-cache 500 nil '(FILES-AND-SUBDIRS
-                                                EMPTY-DIR-P
-                                                SOURCES
-                                                VC
-                                                FIXED-FILENAMES
-                                                REMOTE-PATH
-                                                HOST-ACCESSIBLE)
+						EMPTY-DIR-P
+						SOURCES
+						VC
+						FIXED-FILENAMES
+						REMOTE-PATH
+						HOST-ACCESSIBLE)
   "Cache used for the filebrowser to cache all necessary informations
 associated to file- or directory-names.
 
 Currently there are the following subcaches managed within this cache:
 
   FILES-AND-SUBDIRS:
-  
+
   Cache for every directory all subdirs and files. This is a cache with
      key:   <directory>
      value: \(<file-list> . <subdirs-list>)
-  
+
   EMPTY-DIR-P:
-  
+
   Cache for every directory if it is empty or not. This is a cache with
      key:   <directory>
      value: \(\[nil|t] . <checked-with-show-sources>)
-  
+
   SOURCES:
-  
+
   Cache for the contents of the buffer `ecb-sources-buffer-name'. This is a
   cache with
      key:   <directory>
@@ -1364,19 +1356,21 @@ Currently there are the following subcaches managed within this cache:
 ;; directory separator
 
 (defconst ecb-directory-sep-char
-  (if ecb-running-xemacs
+  ;; (if ecb-running-xemacs
       ;; to avoid compiler complainings
-      (symbol-value 'directory-sep-char)
-    ?/))
+      ;; (symbol-value 'directory-sep-char)
+    ?/
+;; )
+)
 
 (defsubst ecb-directory-sep-char (&optional refdir)
   (if (or (null refdir)
-          (not (ecb-remote-path refdir)))
+	  (not (ecb-remote-path refdir)))
       ecb-directory-sep-char
     ?/))
 
 (defsubst ecb-directory-sep-string (&optional refdir)
-  (char-to-string (ecb-directory-sep-char refdir)))   
+  (char-to-string (ecb-directory-sep-char refdir)))
 
 ;; autocontrol/sync-stuff --------------------------------------------
 
@@ -1414,11 +1408,11 @@ Entry and exit-traces are already buildin in functions defined with
 `defecb-autocontrol/sync-function' and can be switched on/off by
 `ecb-autotrace-autocontrol/sync-functions'."
   (when (or (eq ecb-autotrace-autocontrol/sync-functions t)
-            (member autocontrol-fcn ecb-autotrace-autocontrol/sync-functions))
+	    (member autocontrol-fcn ecb-autotrace-autocontrol/sync-functions))
     (message (concat (format "ECB %s autocontrol-fcn %s autotrace [%s] "
-                             ecb-version autocontrol-fcn
-                             (format-time-string "%H:%M:%S"))
-                     (apply 'format args)))))
+			     ecb-version autocontrol-fcn
+			     (format-time-string "%H:%M:%S"))
+		     (apply 'format args)))))
 
 (defun ecb-bodytrace-autocontrol/sync-fcn-error (autocontrol-fcn &rest args)
   "Run ARGS through `format' and write it to the *Messages*-buffer.
@@ -1432,11 +1426,11 @@ because these ones are already buildin in functions defined with
 Body-tracing can be switched on/off with
 `ecb-bodytrace-autocontrol/sync-function'."
   (when (or (eq ecb-bodytrace-autocontrol/sync-functions t)
-            (member autocontrol-fcn ecb-bodytrace-autocontrol/sync-functions))
+	    (member autocontrol-fcn ecb-bodytrace-autocontrol/sync-functions))
     (message (concat (format "ECB %s autocontrol-fcn %s bodytrace [%s] "
-                             ecb-version autocontrol-fcn
-                             (format-time-string "%H:%M:%S"))
-                     (apply 'format args)))))
+			     ecb-version autocontrol-fcn
+			     (format-time-string "%H:%M:%S"))
+		     (apply 'format args)))))
 
 (defvar ecb-autocontrol/sync-fcn-register nil
   "List of autocontrol/sync-functions defined by
@@ -1459,7 +1453,7 @@ buffer-name of a special ECB-buffer or nil.")
 
 (defun ecb-stop-autocontrol/sync-function (fcn-symbol)
   (let* ((timer-elem (assoc fcn-symbol ecb-idle-timer-alist))
-         (timer (cdr timer-elem)))
+	 (timer (cdr timer-elem)))
     (when timer-elem
       (ecb-cancel-timer timer)
       (setq ecb-idle-timer-alist (delq timer-elem ecb-idle-timer-alist)))
@@ -1467,7 +1461,7 @@ buffer-name of a special ECB-buffer or nil.")
     (remove-hook 'pre-command-hook fcn-symbol)
     (setq ecb-post-command-hooks (delq fcn-symbol ecb-post-command-hooks))
     (setq ecb-pre-command-hooks (delq fcn-symbol ecb-pre-command-hooks))))
-  
+
 
 (defun ecb-activate-ecb-autocontrol-function (value func)
   "Adds function FUNC to `ecb-idle-timer-alist' and activates an idle-timer
@@ -1479,7 +1473,7 @@ and removed from the idle-list \(if it has been contained). If
 has been contained)."
   (unless (assoc func ecb-autocontrol/sync-fcn-register)
     (error "ECB %s: Try to activate unregistered %s as autocontrol/sync-function"
-           ecb-version func))
+	   ecb-version func))
   ;; `ecb-basic-buffer-sync-delay' can never have the value 'basic so this
   ;; recursion is save
   (if (equal 'basic value)
@@ -1494,13 +1488,13 @@ has been contained)."
        (add-to-list 'ecb-pre-command-hooks func))
       (otherwise
        (add-to-list 'ecb-idle-timer-alist
-                    (cons func
-                          (ecb-run-with-idle-timer value t func)))))))
+		    (cons func
+			  (ecb-run-with-idle-timer value t func)))))))
 
 (defmacro defecb-autocontrol/sync-function (fcn buffer-name-symbol
-                                                buffer-sync-option-symbol
-                                                called-interactively-p docstring
-                                                &rest body)
+						buffer-sync-option-symbol
+						called-interactively-p docstring
+						&rest body)
   "Define a function run either by idle-timer or before or after each command.
 Such a function is used either for automatic self-controlling certain aspects
 of ECB or for synchronizing a special window/buffer of ECB with contents of
@@ -1556,7 +1550,7 @@ Example:
   \"Synchronize the buffer of ECB-A-SPECIAL-BUFFER-NAME with...\"
   \(let \(\(x nil))
     \(if force
-        ;; do something
+	;; do something
       ;; do something else
       )
     ))
@@ -1571,53 +1565,53 @@ hold in the variable `ecb-a-special-buffer-name'.
      (defun ,fcn (&optional force)
        ,docstring
        ,(if called-interactively-p
-            '(interactive "P"))
+	    '(interactive "P"))
        (ecb-autotrace-autocontrol/sync-fcn-error (quote ,fcn)
-                                                 "Begin: Cur-buf: %s" (current-buffer))
+						 "Begin: Cur-buf: %s" (current-buffer))
        (let (,(if (and buffer-sync-option-symbol (symbolp buffer-sync-option-symbol))
-                  `(,buffer-sync-option-symbol (if (equal
-                                                    ,buffer-sync-option-symbol
-                                                    'basic)
-                                                   ecb-basic-buffer-sync
-                                                 ,buffer-sync-option-symbol))
-                ;; we need anything to bound in the else-fork, so we just bind
-                ;; major-mode to major-mode - we could use any variable, takes
-                ;; no effect
-                `(major-mode major-mode))
+		  `(,buffer-sync-option-symbol (if (equal
+						    ,buffer-sync-option-symbol
+						    'basic)
+						   ecb-basic-buffer-sync
+						 ,buffer-sync-option-symbol))
+		;; we need anything to bound in the else-fork, so we just bind
+		;; major-mode to major-mode - we could use any variable, takes
+		;; no effect
+		`(major-mode major-mode))
 ;;                 `(,(make-symbol "abc123xyz456efg789") nil))
-             )
-         (when ,(if (and buffer-sync-option-symbol (symbolp buffer-sync-option-symbol))
-                    `(or force
-                         (equal 'always ,buffer-sync-option-symbol)
-                         (equal t ,buffer-sync-option-symbol)
-                         (and ,buffer-sync-option-symbol
-                              (listp ,buffer-sync-option-symbol)
-                              (not (member major-mode ,buffer-sync-option-symbol))))
-                  t)
-           ,(if (and buffer-name-symbol (symbolp buffer-name-symbol))
-                `(ecb-when-point-in-edit-window-ecb-windows-visible
-                  (ecb-do-if-buffer-visible-in-ecb-frame (quote ,buffer-name-symbol)
-                    (ecb-bodytrace-autocontrol/sync-fcn-error (quote ,fcn)
-                                                              "After conditions: Cur-buf: %s" (current-buffer))
-                    ,@body
-                    (ecb-autotrace-autocontrol/sync-fcn-error (quote ,fcn)
-                                                              "End:   Cur-buf: %s" (current-buffer))
-                    nil ;; we always return nil
-                    ))
-              `(progn
-                 (ecb-bodytrace-autocontrol/sync-fcn-error (quote ,fcn)
-                                                           "After conditions: Cur-buf: %s" (current-buffer))
-                 ,@body
-                 (ecb-autotrace-autocontrol/sync-fcn-error (quote ,fcn)
-                                                           "End:   Cur-buf: %s"
-                                                           (current-buffer))
-                 nil ;; we always return nil
-                 )
-              ))))))
+	     )
+	 (when ,(if (and buffer-sync-option-symbol (symbolp buffer-sync-option-symbol))
+		    `(or force
+			 (equal 'always ,buffer-sync-option-symbol)
+			 (equal t ,buffer-sync-option-symbol)
+			 (and ,buffer-sync-option-symbol
+			      (listp ,buffer-sync-option-symbol)
+			      (not (member major-mode ,buffer-sync-option-symbol))))
+		  t)
+	   ,(if (and buffer-name-symbol (symbolp buffer-name-symbol))
+		`(ecb-when-point-in-edit-window-ecb-windows-visible
+		  (ecb-do-if-buffer-visible-in-ecb-frame (quote ,buffer-name-symbol)
+		    (ecb-bodytrace-autocontrol/sync-fcn-error (quote ,fcn)
+							      "After conditions: Cur-buf: %s" (current-buffer))
+		    ,@body
+		    (ecb-autotrace-autocontrol/sync-fcn-error (quote ,fcn)
+							      "End:   Cur-buf: %s" (current-buffer))
+		    nil ;; we always return nil
+		    ))
+	      `(progn
+		 (ecb-bodytrace-autocontrol/sync-fcn-error (quote ,fcn)
+							   "After conditions: Cur-buf: %s" (current-buffer))
+		 ,@body
+		 (ecb-autotrace-autocontrol/sync-fcn-error (quote ,fcn)
+							   "End:   Cur-buf: %s"
+							   (current-buffer))
+		 nil ;; we always return nil
+		 )
+	      ))))))
 (put 'defecb-autocontrol/sync-function 'lisp-indent-function 4)
 
 ;; (insert (pp (macroexpand
-;;              '(defecb-autocontrol/sync-function ecb-analyse-buffer-sync-test 
+;;              '(defecb-autocontrol/sync-function ecb-analyse-buffer-sync-test
 ;;                 ecb-anaylyse-buffer-name-test ecb-basic-buffer-sync nil
 ;;                 "testdoctsirng"
 ;;                 (let ((analysis nil)
@@ -1658,21 +1652,21 @@ function reads them to these hooks."
 ;;; ----- Wrappers for file- and directory-operations ------
 
 (dolist (f '(file-name-nondirectory
-             file-exists-p
-             file-name-directory
-             file-readable-p
-             file-attributes
-             file-name-extension
-             file-directory-p
-             file-accessible-directory-p
-             file-name-sans-extension
-             file-writable-p
-             file-name-as-directory
-             directory-files))
+	     file-exists-p
+	     file-name-directory
+	     file-readable-p
+	     file-attributes
+	     file-name-extension
+	     file-directory-p
+	     file-accessible-directory-p
+	     file-name-sans-extension
+	     file-writable-p
+	     file-name-as-directory
+	     directory-files))
   (fset (intern (format "ecb-%s" f))
-        `(lambda (file-or-dir-name &rest args)
-           ,(format "Delegate all args to `%s' but call first `ecb-fix-path' for FILE-OR-DIR-NAME." f)
-           (apply (quote ,f) (ecb-fix-path file-or-dir-name) args))))
+	`(lambda (file-or-dir-name &rest args)
+	   ,(format "Delegate all args to `%s' but call first `ecb-fix-path' for FILE-OR-DIR-NAME." f)
+	   (apply (quote ,f) (ecb-fix-path file-or-dir-name) args))))
 
 (defun ecb-expand-file-name (name &optional default-dir)
   "Delegate all args to `expand-file-name' but call first `ecb-fix-path'
@@ -1682,18 +1676,18 @@ for both args."
 ;;; ----- Canonical filenames ------------------------------
 
 (defun ecb-fix-path (path)
-  "Fixes an annoying behavior of the native windows-version of XEmacs:
+  "Fixes an annoying behavior of the native windows-version of Emacs.
 When PATH contains only a drive-letter and a : then `expand-file-name' does
 not interpret this PATH as root of that drive. So we add a trailing
 `directory-sep-char' and return this new path because then `expand-file-name'
 treats this as root-dir of that drive. For all \(X)Emacs-version besides the
 native-windows-XEmacs PATH is returned."
   (if (and ecb-running-xemacs
-           (equal system-type 'windows-nt))
+	   (equal system-type 'windows-nt))
       (if (and (= (length path) 2)
-               (equal (aref path 1) ?:))
-          (concat path (ecb-directory-sep-string))
-        path)
+	       (equal (aref path 1) ?:))
+	  (concat path (ecb-directory-sep-string))
+	path)
     path))
 
 ;; accessors for the FIXED-FILENAMES-cache
@@ -1702,25 +1696,25 @@ native-windows-XEmacs PATH is returned."
   "Add FIXED-FILENAME for PATH and FILENAME to the FIXED-FILENAMES-cache
 of `ecb-filename-cache'."
   (ecb-multicache-put-value 'ecb-filename-cache
-                            (concat path filename)
-                            'FIXED-FILENAMES
-                            fixed-filename))
+			    (concat path filename)
+			    'FIXED-FILENAMES
+			    fixed-filename))
 
 (defsubst ecb-fixed-filename-cache-get (path filename)
   "Get the cached value for PATH and FILENAME from the FIXED-FILENAMES-cache
 in `ecb-filename-cache'. If no vaue is cached for PATH and FILENAME then nil
 is returned."
   (ecb-multicache-get-value 'ecb-filename-cache
-                            (concat path filename)
-                            'FIXED-FILENAMES))
+			    (concat path filename)
+			    'FIXED-FILENAMES))
 
 (defun ecb-fixed-filename-cache-dump (&optional no-nil-value)
   "Dump the whole FIXED-FILENAMES-cache. If NO-NIL-VALUE is not nil then these
 cache-entries are not dumped. This command is not intended for end-users of ECB."
   (interactive "P")
   (ecb-multicache-print-subcache 'ecb-filename-cache
-                                 'FIXED-FILENAMES
-                                 no-nil-value))
+				 'FIXED-FILENAMES
+				 no-nil-value))
 
 ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: What about the new cygwin-version
 ;; of GNU Emacs 21? We have to test if this function and all locations where
@@ -1734,55 +1728,53 @@ not nil then in both PATH and FILENAME env-var substitution is done. If the
 `system-type' is 'cygwin32 then the path is converted to win32-path-style!"
   (when (stringp path)
     (or (ecb-fixed-filename-cache-get path filename)
-        (let ((remote-path (ecb-remote-path path))
-              (norm-path nil)
-              (result nil))
-          (if (or (not remote-path)
-                  (ecb-host-accessible-p (nth 1 remote-path)))
-              (progn
-                (setq norm-path (if ecb-running-xemacs
-                                    (case system-type
-                                      (cygwin32
-                                       (mswindows-cygwin-to-win32-path
-                                        (expand-file-name path)))
-                                      (windows-nt
-                                       (expand-file-name (ecb-fix-path path)))
-                                      (otherwise
-                                       (expand-file-name path)))
-                                  (expand-file-name path)))
-                ;; substitute environment-variables
-                (setq norm-path (expand-file-name (if substitute-env-vars
-                                                      (substitute-in-file-name norm-path)
-                                                    norm-path))))
-            (setq norm-path path))
-          ;; For windows systems we normalize drive-letters to downcase
-          (setq norm-path (if (and (member system-type '(windows-nt cygwin32))
-                                   (> (length norm-path) 1)
-                                   (equal (aref norm-path 1) ?:))
-                              (concat (downcase (substring norm-path 0 2))
-                                      (substring norm-path 2))
-                            norm-path))
-          ;; delete a trailing directory-separator if there is any
-          (setq norm-path (if (and (> (length norm-path) 1)
-                                   (= (aref norm-path (1- (length norm-path)))
-                                      (ecb-directory-sep-char path)))
-                              (substring norm-path 0 (1- (length norm-path)))
-                            norm-path))
-          (setq result
-                (concat norm-path
-                        (if (stringp filename)
-                            (concat (when (> (length norm-path) 1)
-                                      ;; currently all protocols like tramp,
-                                      ;; ange-ftp or efs support only not
-                                      ;; windows-remote-hosts ==> we must not
-                                      ;; add a backslash here (would be done
-                                      ;; in case of a native Windows-XEmacs)
-                                      (ecb-directory-sep-string path))
-                                    (file-name-nondirectory (if substitute-env-vars
-                                                                (substitute-in-file-name filename)
-                                                              filename))))))
-          (ecb-fixed-filename-cache-put path filename result)
-          result))))
+	(let ((remote-path (ecb-remote-path path))
+	      (norm-path nil)
+	      (result nil))
+	  (if (or (not remote-path)
+		  (ecb-host-accessible-p (nth 1 remote-path)))
+	      (progn
+		(setq norm-path
+		      ;; (if ecb-running-xemacs
+		      ;;	  (case system-type
+		      ;;	    (cygwin32
+		      ;;	     (mswindows-cygwin-to-win32-path
+		      ;;	      (expand-file-name path)))
+		      ;;	    (windows-nt
+		      ;;	     (expand-file-name (ecb-fix-path path)))
+		      ;;	    (otherwise
+		      ;;	     (expand-file-name path)))
+			(expand-file-name path)
+			)
+		      ;; )
+		;; substitute environment-variables
+		(setq norm-path (expand-file-name (if substitute-env-vars
+						      (substitute-in-file-name norm-path)
+						    norm-path))))
+	    (setq norm-path path))
+	  ;; For windows systems we normalize drive-letters to downcase
+	  (setq norm-path (if (and (member system-type '(windows-nt cygwin32))
+				   (> (length norm-path) 1)
+				   (equal (aref norm-path 1) ?:))
+			      (concat (downcase (substring norm-path 0 2))
+				      (substring norm-path 2))
+			    norm-path))
+	  ;; delete a trailing directory-separator if there is any
+	  (setq norm-path (if (and (> (length norm-path) 1)
+				   (= (aref norm-path (1- (length norm-path)))
+				      (ecb-directory-sep-char path)))
+			      (substring norm-path 0 (1- (length norm-path)))
+			    norm-path))
+	  (setq result
+		(concat norm-path
+			(if (stringp filename)
+			    (concat (when (> (length norm-path) 1)
+				      (ecb-directory-sep-string path))
+				    (file-name-nondirectory (if substitute-env-vars
+								(substitute-in-file-name filename)
+							      filename))))))
+	  (ecb-fixed-filename-cache-put path filename result)
+	  result))))
 
 ;; (ecb-fix-filename "/berndl@ecb.sourceforge.net:~")
 
@@ -1797,20 +1789,20 @@ it t then the face of `ecb-bucket-node-display' is completely ignored, if it
 is 'only-name then the face of `ecb-bucket-node-display' is only ignored for
 NAME but not for a prefix or suffix of `ecb-bucket-node-display' \(if any)."
   (let ((formated-prefix (unless ignore-prefix-suffix
-                           (if (eq ignore-bucket-face t)
-                               (nth 0 ecb-bucket-node-display)
-                             (ecb-merge-face-into-text
-                              (nth 0 ecb-bucket-node-display)
-                              (nth 2 ecb-bucket-node-display)))))
-        (formated-suffix (unless ignore-prefix-suffix
-                           (if (eq ignore-bucket-face t)
-                               (nth 1 ecb-bucket-node-display)
-                             (ecb-merge-face-into-text
-                              (nth 1 ecb-bucket-node-display)
-                              (nth 2 ecb-bucket-node-display)))))
-        (formatted-name (if ignore-bucket-face
-                            name
-                          (ecb-merge-face-into-text name (nth 2 ecb-bucket-node-display)))))
+			   (if (eq ignore-bucket-face t)
+			       (nth 0 ecb-bucket-node-display)
+			     (ecb-merge-face-into-text
+			      (nth 0 ecb-bucket-node-display)
+			      (nth 2 ecb-bucket-node-display)))))
+	(formated-suffix (unless ignore-prefix-suffix
+			   (if (eq ignore-bucket-face t)
+			       (nth 1 ecb-bucket-node-display)
+			     (ecb-merge-face-into-text
+			      (nth 1 ecb-bucket-node-display)
+			      (nth 2 ecb-bucket-node-display)))))
+	(formatted-name (if ignore-bucket-face
+			    name
+			  (ecb-merge-face-into-text name (nth 2 ecb-bucket-node-display)))))
     (concat formated-prefix formatted-name formated-suffix)))
 
 (defun ecb-toggle-do-not-leave-window-after-select ()
@@ -1819,24 +1811,24 @@ See also the option `ecb-tree-do-not-leave-window-after-select'."
   (interactive)
   (let ((tree-buffer (ecb-point-in-ecb-tree-buffer)))
     (if tree-buffer
-        (let ((tree-buf-name (buffer-name tree-buffer)))
-          (if (ecb-member-of-symbol/value-list
-               tree-buf-name
-               ecb-tree-do-not-leave-window-after-select--internal)
-              (progn
-                (setq ecb-tree-do-not-leave-window-after-select--internal
-                      ;; we must try both - the symbol of the tree-buffer-name
-                      ;; and the tree-buffer-name because we do not know what
-                      ;; the user has specified in
-                      ;; `ecb-tree-do-not-leave-window-after-select'!
-                      (delete (ecb-ecb-buffer-registry-get-symbol tree-buf-name)
-                              (delete tree-buf-name
-                                      ecb-tree-do-not-leave-window-after-select--internal)))
-                (message "Selections leave the tree-window of %s" tree-buf-name))
-            (setq ecb-tree-do-not-leave-window-after-select--internal
-                  (append ecb-tree-do-not-leave-window-after-select--internal
-                          (list (ecb-ecb-buffer-registry-get-symbol tree-buf-name))))
-            (message "Selections don't leave the tree-window of %s." tree-buf-name)))
+	(let ((tree-buf-name (buffer-name tree-buffer)))
+	  (if (ecb-member-of-symbol/value-list
+	       tree-buf-name
+	       ecb-tree-do-not-leave-window-after-select--internal)
+	      (progn
+		(setq ecb-tree-do-not-leave-window-after-select--internal
+		      ;; we must try both - the symbol of the tree-buffer-name
+		      ;; and the tree-buffer-name because we do not know what
+		      ;; the user has specified in
+		      ;; `ecb-tree-do-not-leave-window-after-select'!
+		      (delete (ecb-ecb-buffer-registry-get-symbol tree-buf-name)
+			      (delete tree-buf-name
+				      ecb-tree-do-not-leave-window-after-select--internal)))
+		(message "Selections leave the tree-window of %s" tree-buf-name))
+	    (setq ecb-tree-do-not-leave-window-after-select--internal
+		  (append ecb-tree-do-not-leave-window-after-select--internal
+			  (list (ecb-ecb-buffer-registry-get-symbol tree-buf-name))))
+	    (message "Selections don't leave the tree-window of %s." tree-buf-name)))
       (message "Point must stay in an ECB tree-buffer!"))))
 
 (defun ecb-common-tree-buffer-modeline-menu-creator (buf-name)
@@ -1848,17 +1840,16 @@ See also the option `ecb-tree-do-not-leave-window-after-select'."
   "Things which should be performed after creating a tree-buffer.
 The tree-buffer is the current buffer."
   (local-set-key (kbd "C-t") 'ecb-toggle-do-not-leave-window-after-select)
-  (if ecb-running-xemacs
-      ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: Is it necessary to make
-      ;; modeline-map buffer-local for current buffer first?!
-      (define-key modeline-map
-        '(button2up)
-        'ecb-toggle-maximize-ecb-window-with-mouse)
+  ;; (if ecb-running-xemacs
+  ;;     ;; TODO: Klaus Berndl <klaus.berndl@sdm.de>: Is it necessary to make
+  ;;     ;; modeline-map buffer-local for current buffer first?!
+  ;;     (define-key modeline-map
+  ;;	'(button2up)
+  ;;	'ecb-toggle-maximize-ecb-window-with-mouse)
     (local-set-key [mode-line mouse-2]
-                   'ecb-toggle-maximize-ecb-window-with-mouse)))
-  
- 
-
+		   'ecb-toggle-maximize-ecb-window-with-mouse)
+    ;; )
+  )
 
 ;;====================================================
 ;; Mouse callbacks
@@ -1868,7 +1859,7 @@ The tree-buffer is the current buffer."
 					     mouse-button
 					     shift-pressed
 					     control-pressed
-                                             meta-pressed
+					     meta-pressed
 					     tree-buffer-name)
   "This is the callback-function ecb.el gives to every tree-buffer to call
 when a node has been selected. This function does nothing if the click
@@ -1876,30 +1867,30 @@ combination is invalid \(see `ecb-interpret-mouse-click'."
   (let* ((ecb-button-list (ecb-interpret-mouse-click mouse-button
 						     shift-pressed
 						     control-pressed
-                                                     meta-pressed
+						     meta-pressed
 						     tree-buffer-name))
 	 (ecb-button (nth 0 ecb-button-list))
 	 (shift-mode (nth 1 ecb-button-list))
-         (meta-mode (nth 2 ecb-button-list))
-         (keyboard-p (equal (nth 3 ecb-button-list) 'keyboard))
-         (maximized-p (ecb-buffer-is-maximized-p tree-buffer-name))
-         (select-callbacks (ecb-tree-buffer-callbacks-alist-of-type 'select))
-         (callback-fcn nil))
+	 (meta-mode (nth 2 ecb-button-list))
+	 (keyboard-p (equal (nth 3 ecb-button-list) 'keyboard))
+	 (maximized-p (ecb-buffer-is-maximized-p tree-buffer-name))
+	 (select-callbacks (ecb-tree-buffer-callbacks-alist-of-type 'select))
+	 (callback-fcn nil))
     ;; we need maybe later that something has clicked in a tree-buffer, e.g.
     ;; in `ecb-handle-major-mode-visibilty'.
     (setq ecb-item-in-tree-buffer-selected t)
     (if (not keyboard-p)
-        (setq ecb-layout-prevent-handle-ecb-window-selection t))
-    
+	(setq ecb-layout-prevent-handle-ecb-window-selection t))
+
     ;; first we dispatch to the right action
     (when ecb-button-list
       (setq callback-fcn
-            (ecb-member-of-symbol/value-list tree-buffer-name
-                                             select-callbacks
-                                             'car
-                                             'cdr))
+	    (ecb-member-of-symbol/value-list tree-buffer-name
+					     select-callbacks
+					     'car
+					     'cdr))
       (when (functionp callback-fcn)
-        (funcall callback-fcn node ecb-button nil shift-mode meta-mode)))
+	(funcall callback-fcn node ecb-button nil shift-mode meta-mode)))
 
     ;; now we go back to the tree-buffer but only if all of the following
     ;; conditions are true:
@@ -1910,46 +1901,46 @@ combination is invalid \(see `ecb-interpret-mouse-click'."
     ;;    at least `ecb-show-sources-in-directories-buffer-p' is true and the
     ;;    hitted node is a sourcefile
     (when (and (not (ecb-windows-all-hidden))
-               (ecb-member-of-symbol/value-list
-                tree-buffer-name
-                ecb-tree-do-not-leave-window-after-select--internal)
-               (or (not (ecb-string= tree-buffer-name ecb-directories-buffer-name))
-                   (and (ecb-show-sources-in-directories-buffer-p)
-                        (= ecb-directories-nodetype-sourcefile
-                           (tree-node->type node)))))
+	       (ecb-member-of-symbol/value-list
+		tree-buffer-name
+		ecb-tree-do-not-leave-window-after-select--internal)
+	       (or (not (ecb-string= tree-buffer-name ecb-directories-buffer-name))
+		   (and (ecb-show-sources-in-directories-buffer-p)
+			(= ecb-directories-nodetype-sourcefile
+			   (tree-node->type node)))))
       ;; If there is currently no maximized window then we can savely call
       ;; `ecb-goto-ecb-window'. If we have now a maximized window then there
       ;; are two possibilities:
       ;; - if it is not equal to the maximzed tree-buffer before the selection
       ;;   then we must maximi
       (if (and maximized-p
-               (not (ecb-buffer-is-maximized-p tree-buffer-name)))
-          (ecb-maximize-ecb-buffer tree-buffer-name t)
-        (ecb-goto-ecb-window tree-buffer-name))
+	       (not (ecb-buffer-is-maximized-p tree-buffer-name)))
+	  (ecb-maximize-ecb-buffer tree-buffer-name t)
+	(ecb-goto-ecb-window tree-buffer-name))
       (tree-buffer-remove-highlight))))
- 
+
 (defun ecb-tree-buffer-node-collapsed-callback (node
-                                                mouse-button
-                                                shift-pressed
-                                                control-pressed
-                                                meta-pressed
-                                                tree-buffer-name)
+						mouse-button
+						shift-pressed
+						control-pressed
+						meta-pressed
+						tree-buffer-name)
   "This is the callback-function ecb.el gives to every tree-buffer to call
 when a node has been collapsed."
   (let* ((ecb-button-list (ecb-interpret-mouse-click mouse-button
 						     shift-pressed
 						     control-pressed
-                                                     meta-pressed
+						     meta-pressed
 						     tree-buffer-name))
-         (keyboard-p (equal (nth 3 ecb-button-list) 'keyboard)))
+	 (keyboard-p (equal (nth 3 ecb-button-list) 'keyboard)))
     (if (not keyboard-p)
-        (setq ecb-layout-prevent-handle-ecb-window-selection t))))
+	(setq ecb-layout-prevent-handle-ecb-window-selection t))))
 
 (defun ecb-tree-buffer-node-expand-callback (node
 					     mouse-button
 					     shift-pressed
 					     control-pressed
-                                             meta-pressed
+					     meta-pressed
 					     tree-buffer-name)
   "This is the callback-function ecb.el gives to every tree-buffer to call
 when a node should be expanded. This function does nothing if the click
@@ -1957,31 +1948,31 @@ combination is invalid \(see `ecb-interpret-mouse-click')."
   (let* ((ecb-button-list (ecb-interpret-mouse-click mouse-button
 						     shift-pressed
 						     control-pressed
-                                                     meta-pressed
+						     meta-pressed
 						     tree-buffer-name))
 	 (ecb-button (nth 0 ecb-button-list))
 	 (shift-mode (nth 1 ecb-button-list))
-         (meta-mode (nth 2 ecb-button-list))
-         (keyboard-p (equal (nth 3 ecb-button-list) 'keyboard))
-         (expand-callbacks (ecb-tree-buffer-callbacks-alist-of-type 'expand))
-         (callback-fcn nil))
+	 (meta-mode (nth 2 ecb-button-list))
+	 (keyboard-p (equal (nth 3 ecb-button-list) 'keyboard))
+	 (expand-callbacks (ecb-tree-buffer-callbacks-alist-of-type 'expand))
+	 (callback-fcn nil))
     (if (not keyboard-p)
-        (setq ecb-layout-prevent-handle-ecb-window-selection t))
+	(setq ecb-layout-prevent-handle-ecb-window-selection t))
     ;; we just dispatch to the right action
     (when ecb-button-list
       (setq callback-fcn
-            (ecb-member-of-symbol/value-list tree-buffer-name
-                                             expand-callbacks
-                                             'car
-                                             'cdr))
+	    (ecb-member-of-symbol/value-list tree-buffer-name
+					     expand-callbacks
+					     'car
+					     'cdr))
       (when (functionp callback-fcn)
-        (funcall callback-fcn node ecb-button nil shift-mode meta-mode)))))
+	(funcall callback-fcn node ecb-button nil shift-mode meta-mode)))))
 
 (defun ecb-interpret-mouse-click (mouse-button
-                                  shift-pressed
-                                  control-pressed
-                                  meta-pressed
-                                  tree-buffer-name)
+				  shift-pressed
+				  control-pressed
+				  meta-pressed
+				  tree-buffer-name)
   "Converts the physically pressed MOUSE-BUTTON \(1 = mouse-1, 2 = mouse-2, 0 =
 no mouse-button but the keys RET or TAB) to ECB-mouse-buttons: either primary
 or secondary mouse-button depending on the value of CONTROL-PRESSED and the
@@ -2002,19 +1993,19 @@ Currently the fourth argument TREE-BUFFER-NAME is not used here."
     (if (and (not (eq mouse-button 1)) (not (eq mouse-button 2)))
 	nil
       (case ecb-primary-secondary-mouse-buttons
-        (mouse-1--mouse-2
-         (if control-pressed
-             nil
-           (list mouse-button shift-pressed meta-pressed 'mouse)))
-        (mouse-1--C-mouse-1
-         (if (not (eq mouse-button 1))
-             nil
-           (list (if control-pressed 2 1) shift-pressed meta-pressed 'mouse)))
-        (mouse-2--C-mouse-2
-         (if (not (eq mouse-button 2))
-             nil
-           (list (if control-pressed 2 1) shift-pressed meta-pressed 'mouse)))
-        (otherwise nil)))))
+	(mouse-1--mouse-2
+	 (if control-pressed
+	     nil
+	   (list mouse-button shift-pressed meta-pressed 'mouse)))
+	(mouse-1--C-mouse-1
+	 (if (not (eq mouse-button 1))
+	     nil
+	   (list (if control-pressed 2 1) shift-pressed meta-pressed 'mouse)))
+	(mouse-2--C-mouse-2
+	 (if (not (eq mouse-button 2))
+	     nil
+	   (list (if control-pressed 2 1) shift-pressed meta-pressed 'mouse)))
+	(otherwise nil)))))
 
 (defun ecb-show-minibuffer-info (node window when-spec)
   "Checks if any info about the current node in the ECB-window WINDOW should
@@ -2022,9 +2013,9 @@ be displayed. WHEN-SPEC must have the same format as the car of
 `ecb-directories-show-node-info'."
   (or (eq when-spec 'always)
       (and (eq when-spec 'if-too-long)
-           window
-           (>= (tree-node-linelength node)
-               (window-width window)))))
+	   window
+	   (>= (tree-node-linelength node)
+	       (window-width window)))))
 
 
 (tree-buffer-defpopup-command ecb-maximize-ecb-window-menu-wrapper
@@ -2047,7 +2038,7 @@ this is autom. done by the macro `defecb-stealthy'!")
 
 (defun ecb-stealthy-function-state-alist-add (fcn)
   (add-to-list 'ecb-stealthy-function-state-alist
-               (cons fcn 'done)))
+	       (cons fcn 'done)))
 
 (defun ecb-stealthy-function-state-get (fcn)
   "Getter for `ecb-stealthy-function-state-alist'. Return state for the
@@ -2102,13 +2093,13 @@ state for a stealthy function can be done by any code and must be done via
        (ecb-stealthy-function-state-alist-add (quote ,name)))
      (eval-and-compile
        (unless (fboundp (quote ,name))
-         (defun ,name nil
-           ,docstring
-           (let ((state (ecb-stealthy-function-state-get (quote ,name))))
-             (unless (equal state 'done)
-               ,@body)
-             (ecb-stealthy-function-state-set (quote ,name) state)))))))
-  
+	 (defun ,name nil
+	   ,docstring
+	   (let ((state (ecb-stealthy-function-state-get (quote ,name))))
+	     (unless (equal state 'done)
+	       ,@body)
+	     (ecb-stealthy-function-state-set (quote ,name) state)))))))
+
 (put 'defecb-stealthy 'lisp-indent-function 1)
 
 (defvar ecb-stealthy-update-running nil
@@ -2123,19 +2114,19 @@ rotated so the interrupted function is the first element so the next stealthy
 run starts with this interrupted function."
   (unless ecb-stealthy-update-running
     (let ((l ecb-stealthy-function-list)
-          (ecb-stealthy-update-running t)
-          ;; necessary because timers set this locally to t to prevent
-          ;; timer-actions from being quitted by C-g. Our potentially long
-          ;; lasting actions must be quit-able!
-          (inhibit-quit nil))
+	  (ecb-stealthy-update-running t)
+	  ;; necessary because timers set this locally to t to prevent
+	  ;; timer-actions from being quitted by C-g. Our potentially long
+	  ;; lasting actions must be quit-able!
+	  (inhibit-quit nil))
       (while (and l (equal 'done (funcall (car l))))
-        (setq l (cdr l)))
+	(setq l (cdr l)))
       ;; if l is nil this means all functions have successfully completed -
       ;; otherwise we ensure that next time we start with the interrupted
       ;; function.
       (when l
-        (setq ecb-stealthy-function-list
-              (ecb-rotate ecb-stealthy-function-list (car l)))))))
+	(setq ecb-stealthy-function-list
+	      (ecb-rotate ecb-stealthy-function-list (car l)))))))
 
 ;
 ;; generation of nodes rsp. of attributes of nodes
@@ -2154,19 +2145,19 @@ the returned string: 'tree-buffer-image-start which holds 0 as value and
 'tree-buffer-image-length which holds the absolute value of FIRST-CHARS
 value."
   (let ((image nil)
-        (ret nil))
+	(ret nil))
     (with-current-buffer name-of-buffer
       (setq image (and icon-name (tree-buffer-find-image icon-name)))
       (setq ret
-            (if image
-                (if (> first-chars 0)
-                    (tree-buffer-add-image-icon-maybe
-                     0 first-chars text-name image)
-                  (concat (tree-buffer-add-image-icon-maybe
-                           0 (- first-chars)
-                           (make-string (- first-chars) ? ) image)
-                          text-name))
-              text-name)))
+	    (if image
+		(if (> first-chars 0)
+		    (tree-buffer-add-image-icon-maybe
+		     0 first-chars text-name image)
+		  (concat (tree-buffer-add-image-icon-maybe
+			   0 (- first-chars)
+			   (make-string (- first-chars) ? ) image)
+			  text-name))
+	      text-name)))
     ret))
 
 
